@@ -1,0 +1,7 @@
+1. Short inrto index page
+2. Page for buying house
+3. Contact page
+4. Favorites page
+5. Modal for every single house
+6. About us
+
