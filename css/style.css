@@ -528,7 +528,7 @@ li>a:only-child:after {
 
 /* banner */
 .mian-content-wthree {
-    background: url(../images/banner.jpg) no-repeat top;
+    background: url(../images/banner.png) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -688,6 +688,12 @@ a.service-btn:hover {
     right: 0;
     bottom: 0;
 }
+.service-card{
+    transition: all .2s ease-in-out;
+}
+.service-card:hover{
+    transform: scale(1.1);
+}
 
 /* //services */
 
@@ -731,6 +737,13 @@ a.service-btn:hover {
     color: #eee;
     font-size: 13px;
     margin-top: 10px;
+}
+.place-card{
+    transition: all .2s ease-in-out;
+}
+.place-card:hover{
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px 0px rgba(158,152,158,1);
 }
 
 /* //places */
