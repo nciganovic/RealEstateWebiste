@@ -1,0 +1,18 @@
+[
+    {
+        "name":"Home",
+        "href":"index.html"
+    },
+    {
+        "name":"Find a Property",
+        "href":"propety.html"
+    },
+    {
+        "name":"Favorites",
+        "href":"favorites.html"
+    },
+    {
+        "name":"Contact us",
+        "href":"contact.html"
+    }
+]

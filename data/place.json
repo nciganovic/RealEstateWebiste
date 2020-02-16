@@ -1,0 +1,26 @@
+[
+    {
+        "place":"Place 1",
+        "img":"team-img-1",
+        "city":"City 1",
+        "extra":""
+    },
+    {
+        "place":"Place 2",
+        "img":"team-img-2",
+        "city":"City 2",
+        "extra":"mt-sm-0 mt-4"
+    },
+    {
+        "place":"Place 3",
+        "img":"team-img-3",
+        "city":"City 3",
+        "extra":"mt-lg-0 mt-4"
+    },
+    {
+        "place":"Place 4",
+        "img":"team-img-4",
+        "city":"City 4",
+        "extra":"mt-lg-0 mt-4"
+    }
+]

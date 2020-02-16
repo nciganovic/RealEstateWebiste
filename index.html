@@ -19,7 +19,7 @@
     <!-- //Meta tag Keywords -->
 
     <!-- Custom-Files -->
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Bootstrap-Core-CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <!-- Style-CSS -->
@@ -39,31 +39,20 @@
 
 <body>
     <!-- header -->
-    <header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
         <div class="container">
-            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
-                <!-- logo -->
-                <div id="logo">
-                    <h1><a href="index.html"><span class="text-bl">L</span>and</a></h1>
-                </div>
-                <!-- //logo -->
-                <!-- nav -->
-                <div class="nav_w3ls ml-lg-5">
-                    <nav>
-                        <label for="drop" class="toggle">Menu</label>
-                        <input type="checkbox" id="drop" />
-                        <ul class="menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="#find">Find a Property</a></li>
-                            <li><a href="#find">Favorites</a></li>
-                            <li><a href="#contact">Contact Us</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- //nav -->
-            </div>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars font-15 text-dark" aria-hidden="true"></i>
+          </button>
+          <a class="navbar-brand text-dark mont" href="#">Landy</a>
+        
+          <div class="navbar-collapse collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+              
+            </ul>
+          </div>
         </div>
-    </header>
+    </nav>
     <!-- //header -->
 
     <!-- banner -->
@@ -155,49 +144,7 @@
             <h3 class="title-w3 mb-2 text-center text-wh font-weight-bold">We Provide The <span>Best Services</span>
             </h3>
             <p class="text-li text-center title-w3 mb-md-5 mb-4">Excepteur sint occaecat cupidatat</p>
-            <div class="row w3pvtits-services-row text-center pt-4">
-                <div class="col-lg-4 service-card">
-                    <a href="#">
-                        <div class="w3pvtits-services-grids">
-                            <div class="icon-effect-wthree">
-                                <span class="fa fa-home ser-icon"></span>
-                            </div>
-                            <h4 class="text-bl my-4">Buy house</h4>
-                            <p class="text-center">Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.</p>
-                            <a class="service-btn btn mt-xl-5 mt-4" href="#">Read More
-                                <span class="fa fa-long-arrow-right ml-2"></span>
-                            </a>
-                        </div>  
-                    </a>
-                </div>
-                <div class="col-lg-4 serv-w3mk my-lg-0 my-5 service-card">
-                    <a href="#">
-                        <div class="w3pvtits-services-grids">
-                            <div class="icon-effect-wthree">
-                                <span class="fa fa-building ser-icon"></span>
-                            </div>
-                            <h4 class="text-bl my-4">Buy apartment</h4>
-                            <p class="text-center">Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.</p>
-                            <a class="service-btn btn mt-xl-5 mt-4" href="#">Read More
-                                <span class="fa fa-long-arrow-right ml-2"></span>
-                            </a>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 service-card">
-                    <a href="#">
-                        <div class="w3pvtits-services-grids">
-                            <div class="icon-effect-wthree">
-                                <span class="fa fa-university ser-icon"></span>
-                            </div>
-                            <h4 class="text-bl my-4">Buy land</h4>
-                            <p class="text-center">Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.</p>
-                            <a class="service-btn btn mt-xl-5 mt-4" href="#">Read More
-                                <span class="fa fa-long-arrow-right ml-2"></span>
-                            </a>
-                        </div>
-                    </a>
-                </div>
+            <div id="services-cards" class="row w3pvtits-services-row text-center pt-4">
             </div>
         </div>
         <img src="images/img.png" alt="services" class="img-fluid img-posi-w3pvt" />
@@ -209,46 +156,8 @@
         <div class="container py-xl-5 py-lg-3">
             <h3 class="title-w3 mb-2 text-center text-bl font-weight-bold">Most Popular <span>Places</span></h3>
             <p class="text-center title-w3 mb-md-5 mb-4">Excepteur sint occaecat cupidatat</p>
-            <div class="row branches-position pt-4">
-                <div class="col-lg-3 col-sm-6 place-w3">
-                    <!-- branch-img -->
-                    <div class="team-img team-img-1 place-card">
-                        <div class="team-content">
-                            <h4 class="text-wh">Place 1</h4>
-                            <p class="team-meta">Canada</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- / branch-img -->
-                <div class="col-lg-3 col-sm-6 place-w3 mt-sm-0 mt-4">
-                    <!-- team-img -->
-                    <div class="team-img team-img-2 place-card">
-                        <div class="team-content">
-                            <h4 class="text-wh">Place 2</h4>
-                            <p class="team-meta">New York City</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.branch-img -->
-                <div class="col-lg-3 col-sm-6 place-w3 mt-lg-0 mt-4">
-                    <!-- team-img -->
-                    <div class="team-img team-img-3 place-card">
-                        <div class="team-content">
-                            <h4 class="text-wh">Place 3</h4>
-                            <p class="team-meta">United States</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.branch-img -->
-                <div class="col-lg-3 col-sm-6 place-w3 mt-lg-0 mt-4">
-                    <!-- team-img -->
-                    <div class="team-img team-img-4 place-card">
-                        <div class="team-content">
-                            <h4 class="text-wh">Place 4</h4>
-                            <p class="team-meta">Paris</p>
-                        </div>
-                    </div>
-                </div>
+            <div id="place-cards" class="row branches-position pt-4">
+               
             </div>
         </div>
     </section>
@@ -372,8 +281,8 @@
                 <!-- //copyright -->
                 <!-- social icons -->
                 <div class="col-lg-4 w3social-icons text-lg-right text-center mt-lg-0 mt-3">
-                    <ul>
-                        <li>
+                    <ul id="social-media">
+                        <!--<li>
                             <a href="#" class="rounded-circle">
                                 <span class="fa fa-facebook-f"></span>
                             </a>
@@ -392,7 +301,7 @@
                             <a href="#" class="rounded-circle">
                                 <span class="fa fa-dribbble"></span>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
                 <!-- //social icons -->
@@ -405,8 +314,11 @@
         <span class="fa fa-angle-double-up" aria-hidden="true"></span>
     </a>
     <!-- //move top icon -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="js/everypage.js"></script>
     <script src="js/main.js"></script>
 
 </body>

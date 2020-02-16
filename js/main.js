@@ -1,6 +1,32 @@
 $(document).ready(function(){
     console.log("main.js");
 
+    $.ajax({
+        url : "data/services.json",
+        method: 'GET', 
+        type: 'json',
+        success: function(data) { 
+            console.log(data);
+            makeServices(data);
+        },
+        error: function(xhr, error, status) {
+            console.log(xhr);
+        }
+    });
+
+    $.ajax({
+        url : "data/place.json",
+        method: 'GET', 
+        type: 'json',
+        success: function(data) { 
+            console.log(data);
+            makePlace(data);
+        },
+        error: function(xhr, error, status) {
+            console.log(xhr);
+        }
+    });
+
     $(".btn").click(function(){
         console.log("Btn click");
 
@@ -76,3 +102,53 @@ $(document).ready(function(){
     })
     
 })
+
+function makeServices(data){
+    var html = "";
+    var idx = 0;
+    data.forEach(element=> {
+        html += `<div class="col-lg-4 ` 
+        
+        if(idx == 1){
+            html += "serv-w3mk my-lg-0 my-5";
+        }
+        console.log(idx);
+
+        html += ` service-card">
+            <a href="#">
+                <div class="w3pvtits-services-grids">
+                    <div class="icon-effect-wthree">
+                        <span class="fa ${element.icon} ser-icon"></span>
+                    </div>
+                    <h4 class="text-bl my-4">${element.headline}</h4>
+                    <p class="text-center">${element.text}</p>
+                    <a class="service-btn btn mt-xl-5 mt-4" href="#">Read More
+                        <span class="fa fa-long-arrow-right ml-2"></span>
+                    </a>
+                </div>  
+            </a>
+        </div>
+        `;
+        idx++;
+    });
+    $("#services-cards").html(html);
+
+}
+
+function makePlace(data){
+    var html = "";
+    data.forEach(element=> {
+        html += `
+                <div class="col-lg-3 col-sm-6 place-w3 ${element.extra}">
+                    <!-- branch-img -->
+                    <div class="team-img ${element.img} place-card">
+                        <div class="team-content">
+                            <h4 class="text-wh">${element.place}</h4>
+                            <p class="team-meta">${element.city}</p>
+                        </div>
+                    </div>
+                </div>
+        `;
+    });
+    $("#place-cards").html(html);
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "fa-home",
+        "headline":"Buy home1",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+    },
+    {
+        "icon": "fa-building",
+        "headline":"Buy apartment1",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+    },
+    {
+        "icon": "fa-university",
+        "headline":"Buy land1",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+    }
+]
