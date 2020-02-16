@@ -43,7 +43,7 @@ function makeSocial(data){
     data.forEach(element => {
         html += `<li class="pl-2">
                     <a href="${element.href}" class="rounded-circle">
-                        <span class="fa ${element.icon}"></span>
+                        <span class="fab ${element.icon}"></span>
                     </a>
                 </li>`;
     });
