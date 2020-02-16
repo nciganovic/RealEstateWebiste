@@ -64,10 +64,10 @@ $(document).ready(function(){
                     $(".form-errors").append("<p class='text-light'>Email is not in the right format.</p>");
                 }
                 if(element == 'subject'){
-                    $(".form-errors").append("<p class='text-light'>Subject needs to be 50 or less characters, also special characters like #$%&/()'<>;: are not allowed.</p>");
+                    $(".form-errors").append("<p class='text-light'>Subject needs to be between 5 and 50 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
                 }
                 if(element == 'message'){
-                    $(".form-errors").append("<p class='text-light'>Message needs to be 300 or less characters, also special characters like #$%&/()'<>;: are not allowed.</p>");
+                    $(".form-errors").append("<p class='text-light'>Message needs to be between 20 and 300 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
                 }
             });
         }
