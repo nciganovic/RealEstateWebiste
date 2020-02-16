@@ -351,7 +351,7 @@ li>a:only-child:after {
     }
 
     nav ul {
-        float: right;
+        float: left;
     }
 
     /* Change menu item's width to 100% */
@@ -1573,9 +1573,9 @@ p.dont-do a:hover,
         padding: 3px 10px;
     }
 
-    a.navbar-brand {
+    /*a.navbar-brand {
         font-size: 44px;
-    }
+    }*/
 
     nav.navbar.fixed-top.navbar-expand-lg.navbar-light.navbar-fixed-top.top-nav-collapse {
         padding: 0px 10px;
@@ -1712,9 +1712,9 @@ p.dont-do a:hover,
         padding: 2em;
     }
 
-    a.navbar-brand {
+    /*a.navbar-brand {
         font-size: 40px;
-    }
+    }*/
 
     .style-banner h3 {
         font-size: 34px;
