@@ -34,7 +34,7 @@ function makeMenu(data){
                 </li>`;
     });
 
-    $(".navbar-nav").html(html);
+    $("#navbar-main").html(html);
 }
 
 function makeSocial(data){

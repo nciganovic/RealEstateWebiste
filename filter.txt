@@ -1,0 +1,7 @@
+1. Max price  
+2. Min price
+3. Search
+4. Number of bedrooms
+5. Type
+6. Location
+7. Square feet
