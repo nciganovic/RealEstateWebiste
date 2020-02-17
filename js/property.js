@@ -5,13 +5,61 @@ $(document).ready(function(){
         method: 'GET', 
         type: 'json',
         success: function(data) { 
+            updateFilters(data);
             showProperties(data);
         },
         error: function(xhr, error, status) {
             console.log(xhr);
         }
     });
+
+    $("#min-price").change(checkValue);
+    $("#max-price").change(checkValue);
+    $("#min-rooms").change(checkValue);
+    $("#max-rooms").change(checkValue);
 })
+
+function updateFilters(data){
+    var allStatuses = [];
+    var allTypes = [];
+    var allLocations = [];
+    var allPrices = [];
+    var allRooms = [];
+
+    for(d of data){
+        if(!allStatuses.includes(d.status)){
+            allStatuses.push(d.status);
+        }
+        if(!allTypes.includes(d.type)){
+            allTypes.push(d.type);
+        }
+        if(!allLocations.includes(d.location)){
+            allLocations.push(d.location);
+        }
+        if(!allPrices.includes(d.price)){
+            var str = d.price;
+            var removeDot = str.replace(".", "");
+            var number = Number(removeDot);
+            allPrices.push(number);
+        }
+        if(!allRooms.includes(d.rooms)){
+            var num = Number(d.rooms);
+            allRooms.push(num);
+        }
+    }
+
+    var maxPrice = Math.max.apply(Math, allPrices); 
+    var maxRooms = Math.max.apply(Math, allRooms); 
+    $("#max-price").attr("max", maxPrice);
+    $("#max-price").attr("value", maxPrice);
+    $("#max-rooms").attr("max", maxRooms);
+    $("#max-rooms").attr("value", maxRooms);
+    
+    makeSelectTag(allStatuses, "Status");
+    makeSelectTag(allTypes, "Type");
+    makeSelectTag(allLocations, "Location");
+
+}
 
 function showProperties(data){
     console.log(data);
@@ -62,4 +110,70 @@ function showProperties(data){
         `
     }
     $("#property-card-holder").html(html);
+}
+
+function makeSelectTag(data, name){
+    html = `<option value='0'>${name}</option>`;
+    for(d of data){
+        html += `<option value="${d}">${d}</option>`
+    }
+    var nameToLow = name.toLowerCase();
+    $(`[name='${nameToLow}']`).html(html);
+}
+
+function checkValue(){
+    console.log(this);
+    var id = $(this).attr("id");
+    var getNames = id.split("-");
+    var maxMin = getNames[0];
+    var priceRoom = getNames[1];
+
+    var maxValue = $(this).attr("max");
+ 
+
+    if(maxMin == "max" && priceRoom == "price"){
+        var a = document.getElementById("min-price").value;
+        var b = document.getElementById("max-price").value;
+        if(b < a){
+            document.getElementById("max-price").value = a;
+        }
+        if(b > maxValue){
+            document.getElementById("max-price").value = maxValue;
+        }
+    }
+    else if(maxMin == "min" && priceRoom == "price"){
+        var a = document.getElementById("min-price").value;
+        var b = document.getElementById("max-price").value;
+        console.log("--MIN-PRICE--");
+        console.log(a,b);
+        if(a > b){
+            console.log(a, "is bigger then", b);
+            document.getElementById("min-price").value = b;
+        }
+        if(a < 0){
+            document.getElementById("min-price").value = 0;
+        }
+    }
+    else if(maxMin == "max" && priceRoom == "rooms"){
+        var c = document.getElementById("min-rooms").value;
+        var d = document.getElementById("max-rooms").value;
+        if(d < c){
+            document.getElementById("max-rooms").value = c;
+        }
+        if(d > maxValue){
+            document.getElementById("max-rooms").value = maxValue;
+        }
+    }
+    else if(maxMin == "min" && priceRoom == "rooms"){
+        var c = document.getElementById("min-rooms").value;
+        var d = document.getElementById("max-rooms").value;
+        if(c > d){
+            var getBig = document.getElementById("max-rooms").value;
+            document.getElementById("min-rooms").value = getBig;
+        }
+        if(c < 0){
+            document.getElementById("min-rooms").value = 0;
+        }
+    }
+     
 }
