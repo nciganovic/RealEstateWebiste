@@ -1,0 +1,90 @@
+[
+    {
+        "title":"Title 1",
+        "location":"Location 1",
+        "status":"Rent",
+        "price":"100.000",
+        "type":"House",
+        "rooms":"4",
+        "owner":"Pera Peric",
+        "date":"2018-1-1",
+        "img":"g1.jpg"
+    },
+    {
+        "title":"Title 2",
+        "location":"Location 2",
+        "status":"Sale",
+        "price":"250.000",
+        "type":"House",
+        "rooms":"3",
+        "owner":"Mika Mikic",
+        "date":"2019-5-7",
+        "img":"g2.jpg"
+    },
+    {
+        "title":"Title 3",
+        "location":"Location 3",
+        "status":"Sale",
+        "price":"300.000",
+        "type":"Apartment",
+        "rooms":"8",
+        "owner":"Zika Zikic",
+        "date":"2019-10-2",
+        "img":"g3.jpg"
+    },
+    {
+        "title":"Title 4",
+        "location":"Location 4",
+        "status":"Sale",
+        "price":"50.000",
+        "type":"House",
+        "rooms":"2",
+        "owner":"Pera Peric",
+        "date":"2020-1-4",
+        "img":"g4.jpg"
+    },
+    {
+        "title":"Title 5",
+        "location":"Location 1",
+        "status":"Sale",
+        "price":"30.000",
+        "type":"Apartment",
+        "rooms":"4",
+        "owner":"Steva Stevic",
+        "date":"2019-12-31",
+        "img":"g5.jpg"
+    },
+    {
+        "title":"Title 6",
+        "location":"Location 2",
+        "status":"Sale",
+        "price":"40.000",
+        "type":"Land",
+        "rooms":"6",
+        "owner":"Slavko Slavic",
+        "date":"2018-15-3",
+        "img":"g6.jpg"
+    },
+    {
+        "title":"Title 7",
+        "location":"Location 3",
+        "status":"Rent",
+        "price":"75.000",
+        "type":"Apartment",
+        "rooms":"5",
+        "owner":"Pera Peric",
+        "date":"2020-1-2",
+        "img":"g7.jpg"
+    },
+    {
+        "title":"Title 8",
+        "location":"Location 4",
+        "status":"Sale",
+        "price":"800.000",
+        "type":"Apartment",
+        "rooms":"3",
+        "owner":"Rajko Rajkovic",
+        "date":"2019-5-5",
+        "img":"g8.jpg"
+    }
+]
