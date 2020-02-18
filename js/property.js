@@ -29,6 +29,7 @@ $(document).ready(function(){
             success: function(data) { 
                 var filteredData = filterData(data, allFilters);
                 console.log(filteredData);
+                showProperties(filteredData);
             },
             error: function(xhr, error, status) {
                 console.log(xhr);
@@ -242,50 +243,55 @@ function getFilterData(){
 function filterData(data, filters){
     var filteredData = data;
     console.log("PRE status", filteredData);
-    // filter on status
-    if(filters.status != "0"){
-        for(idx in filteredData){
-            var price = strToNumber(filteredData[idx].price);
+    
+    for(idx in filteredData){
+        // filter on status
+        if(filters.status != "0"){
             if(filters.status != filteredData[idx].status){
                 delete filteredData[idx];
                 continue;
             }
-            if(price > filters.maxPrice || price < filters.minPrice){
-                delete filteredData[idx];
-                continue;
-            }
-            if(filteredData[idx].rooms > filters.maxRooms || filteredData[idx].rooms < filters.minRooms){
-                delete filteredData[idx];
-                continue;
-            }
+                
         }
-    }
-    // filter on type
-    if(filters.type != "0"){
-        for(idx in filteredData){
-            console.log("idx", idx, " ->", filters.type, filteredData[idx].type);
+
+        // filter on price
+        var price = strToNumber(filteredData[idx].price);
+        if(price > filters.maxPrice || price < filters.minPrice){
+            delete filteredData[idx];
+            continue;
+        }
+
+        // filter on rooms
+        if(Number(filteredData[idx].rooms) > filters.maxRooms || Number(filteredData[idx].rooms) < filters.minRooms){
+            delete filteredData[idx];
+            continue;
+        }
+
+        // filter on type
+        if(filters.type != "0"){
             if(filters.type != filteredData[idx].type){
                 delete filteredData[idx];
-            }
-            
+                continue;
+            } 
         }
-    }
-    // filter on location
-    if(filters.location != "0"){
-        for(idx in filteredData){
-            console.log("idx", idx, " ->", filters.location, filteredData[idx].location);
+
+        // filter on location
+        if(filters.location != "0"){
             if(filters.location != filteredData[idx].location){
                 delete filteredData[idx];
-            }
-            
+                continue;
+            }   
         }
     }
+    
+    var filtered = filteredData.filter(function (el) {
+        return el != null;
+    });
 
+    console.log("No null data ----->", filtered)
+       
     console.log("POST status", filteredData);
-    
-    
-
-
+    return filtered;
 }
 
 function strToNumber(str){
