@@ -28,7 +28,6 @@ $(document).ready(function(){
             type: 'json',
             success: function(data) { 
                 var filteredData = filterData(data, allFilters);
-                console.log(filteredData);
                 showProperties(filteredData);
             },
             error: function(xhr, error, status) {
@@ -36,6 +35,24 @@ $(document).ready(function(){
             }
         });
     })
+
+    $(".btn-search").click(function(){
+        var search = $("#search").val();
+        
+        $.ajax({
+            url : "data/properties.json",
+            method: 'GET', 
+            type: 'json',
+            success: function(data) { 
+                var newData = searchForData(data, search);
+                showProperties(newData);
+            },
+            error: function(xhr, error, status) {
+                console.log(xhr);
+            }
+        });
+    })
+
 })
 
 function updateFilters(data){
@@ -363,4 +380,19 @@ function orderData(data, orderby){
         return data;
     }
     
+}
+
+function searchForData(data, search){
+    var newData = [];
+    for(d of data){
+        var title = d.title;
+        var rgx = new RegExp(`${search.toLowerCase()}`)
+        var isFound = rgx.test(title.toLowerCase());
+        console.log(d.title, "-->", isFound);
+        if(isFound){
+            newData.push(d);
+        }
+    }
+
+    return newData;
 }

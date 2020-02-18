@@ -983,7 +983,15 @@ ul.facilities-list i {
     padding-top: 0.7em;
     margin-top: 1em;
 }
+.heart{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 2rem;
+    color: white;
+}
 /***************************/
+
 
 @media screen and (max-width: 1440px) {
     .portfolio-area li {
