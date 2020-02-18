@@ -290,6 +290,10 @@ function filterData(data, filters){
 
     console.log("No null data ----->", filtered)
        
+    var orderedData = orderData(filtered, filters.orderby);
+    
+    console.log("After sorting ----->", orderedData);
+
     console.log("POST status", filteredData);
     return filtered;
 }
@@ -298,4 +302,65 @@ function strToNumber(str){
     var x = str.replace(".", "");
     var y = Number(x);
     return y;
+}
+
+function orderData(data, orderby){
+    console.log(orderby);
+    if(orderby == "ap"){
+        data.sort((a,b) => {
+            var a = strToNumber(a.price);
+            var b = strToNumber(b.price);
+            if(a > b)
+                return 1;
+            else if(a < b)
+                return -1;
+            else 
+                return 0;
+        });
+    
+        return data;
+    }
+    else if(orderby == "dp"){
+        data.sort((a,b) => {
+            var a = strToNumber(a.price);
+            var b = strToNumber(b.price);
+            if(a > b)
+                return -1;
+            else if(a < b)
+                return 1;
+            else 
+                return 0;
+        });
+    
+        return data;
+    }
+    else if(orderby == "new"){
+        data.sort((a,b) => {
+            var dateA = new Date(a.date);
+            var dateB = new Date(b.date);
+            if(dateA > dateB)
+                return -1;
+            else if(a < b)
+                return 1;
+            else 
+                return 0;
+        });
+    
+        return data;
+    }
+    else if(orderby == "old"){
+        data.sort((a,b) => {
+            var dateA = new Date(a.date);
+            var dateB = new Date(b.date);
+            if(dateA > dateB)
+                return 1;
+            else if(a < b)
+                return -1;
+            else 
+                return 0;
+        });
+    
+        return data;
+    }
+    
 }
