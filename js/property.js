@@ -1,6 +1,6 @@
 $(document).ready(function(){
     console.log("property.js");
-    localStorage.removeItem("fav");
+    //localStorage.removeItem("fav");
     $.ajax({
         url : "data/properties.json",
         method: 'GET', 
