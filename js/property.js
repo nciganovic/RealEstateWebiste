@@ -63,23 +63,6 @@ $(document).ready(function(){
         e.preventDefault()
         var id = $(this).attr("item");
         var specificData;
-        /*
-        $.ajax({
-            url : "data/properties.json",
-            method: 'GET', 
-            type: 'json',
-            success: function(data) { 
-                for(d of data){
-                    if(d.id == id){
-                        console.log(d);
-                    }
-                }
-            },
-            error: function(xhr, error, status) {
-                console.log(xhr);
-            }
-        });        
-        */
         if($(this).attr("data") == 0){
             $(this).attr("data", "1");
             $(this).text("Remove from favorites");
