@@ -53,6 +53,43 @@ $(document).ready(function(){
         });
     })
 
+    $(".close-modal").click(function(event){
+        event.preventDefault();
+        $("#modal").addClass("d-none");
+        $("#modal").removeClass("d-flex");
+    })
+
+    $(".add-fav").click(function(e){
+        e.preventDefault()
+        var id = $(this).attr("item");
+        var specificData;
+        /*
+        $.ajax({
+            url : "data/properties.json",
+            method: 'GET', 
+            type: 'json',
+            success: function(data) { 
+                for(d of data){
+                    if(d.id == id){
+                        console.log(d);
+                    }
+                }
+            },
+            error: function(xhr, error, status) {
+                console.log(xhr);
+            }
+        });        
+        */
+        if($(this).attr("data") == 0){
+            $(this).attr("data", "1");
+            $(this).text("Remove from favorites");
+        }
+        else{
+            $(this).attr("data", "0");
+            $(this).text("Add to favorites");
+        }
+    })
+    
 })
 
 function updateFilters(data){
@@ -113,7 +150,7 @@ function showProperties(data){
                         </h4>
                         <div class="location mt-2 mb-2">
                             <a href="single.html">
-                               <i class="fas fa-map-marker-alt"></i> ${d.location},
+                               <i class="fas fa-map-marker-alt"></i> ${d.location},  ${d.date}
                             </a>
                         </div>
                         <ul class="facilities-list clearfix">
@@ -136,14 +173,25 @@ function showProperties(data){
                             <i class="fa fa-user"></i> ${d.owner}
                         </a>
                         <span>
-                            <i class="fa fa-calendar-o"></i> ${d.date}
+                            <a class="open-modal" item="${d.id}" href="">Read more <i class="fas fa-arrow-right"></i></a>
                         </span>
                     </div>
                 </div>
             </div>
         `
     }
+
     $("#property-card-holder").html(html);
+
+    $(".open-modal").click(function(event){
+        event.preventDefault();
+        $("#modal").removeClass("d-none");
+        $("#modal").addClass("d-flex");
+        showSpecificModal(this, data);
+
+        
+
+    })
 }
 
 function makeSelectTag(data, name){
@@ -395,4 +443,26 @@ function searchForData(data, search){
     }
 
     return newData;
+}
+
+function showSpecificModal(item, data){
+    console.log(item);
+    var id = $(item).attr("item");
+    var specItem;
+    $(".modal-info").html("");
+    for(d of data){
+        if(d.id == id){
+            specItem = `
+                    <li>${d.title}</li>
+                    <li>${d.location}</li>
+                    <li>${d.status}</li>
+                    <li>${d.type}</li>
+                    <li>${d.price}</li>
+                    <li>${d.rooms}</li>
+                `
+            $(".modal-info").html(specItem);
+
+            $(".add-fav").attr("item", id);
+        }
+    }
 }

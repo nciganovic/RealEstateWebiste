@@ -1,5 +1,6 @@
 [
     {
+        "id": 0,
         "title":"Title 1",
         "location":"Location 1",
         "status":"Rent",
@@ -11,6 +12,7 @@
         "img":"g1.jpg"
     },
     {
+        "id": 1,
         "title":"Title 2",
         "location":"Location 2",
         "status":"Sale",
@@ -22,6 +24,7 @@
         "img":"g2.jpg"
     },
     {
+        "id": 2,
         "title":"Title 3",
         "location":"Location 3",
         "status":"Sale",
@@ -33,6 +36,7 @@
         "img":"g3.jpg"
     },
     {
+        "id": 3,
         "title":"Title 4",
         "location":"Location 4",
         "status":"Sale",
@@ -44,6 +48,7 @@
         "img":"g4.jpg"
     },
     {
+        "id": 4,
         "title":"Title 5",
         "location":"Location 1",
         "status":"Sale",
@@ -55,6 +60,7 @@
         "img":"g5.jpg"
     },
     {
+        "id": 5,
         "title":"Title 6",
         "location":"Location 2",
         "status":"Sale",
@@ -66,6 +72,7 @@
         "img":"g6.jpg"
     },
     {
+        "id": 6,
         "title":"Title 7",
         "location":"Location 3",
         "status":"Rent",
@@ -77,6 +84,7 @@
         "img":"g7.jpg"
     },
     {
+        "id": 7,
         "title":"Title 8",
         "location":"Location 4",
         "status":"Sale",
