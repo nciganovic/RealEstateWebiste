@@ -1,5 +1,6 @@
 $(document).ready(function(){
     console.log("property.js");
+    localStorage.removeItem("fav");
     $.ajax({
         url : "data/properties.json",
         method: 'GET', 
@@ -59,20 +60,35 @@ $(document).ready(function(){
         $("#modal").removeClass("d-flex");
     })
 
+    //Favorites
     $(".add-fav").click(function(e){
-        e.preventDefault()
+        e.preventDefault();
         var id = $(this).attr("item");
-        var specificData;
-        if($(this).attr("data") == 0){
-            $(this).attr("data", "1");
-            $(this).text("Remove from favorites");
-        }
-        else{
-            $(this).attr("data", "0");
-            $(this).text("Add to favorites");
-        }
-    })
-    
+        var allData;
+
+        $.ajax({
+            url : "data/properties.json",
+            method: 'GET', 
+            type: 'json',
+            success: function(data) { 
+                for(d of data){
+                    if(d.id == id){
+                        var thisItem = d;
+                    }
+                }
+                var favorites = localStorage.getItem("fav");
+                console.log(favorites);
+                var favParsed = JSON.parse(favorites);
+                console.log(favParsed);
+                addOrRemoveFavorites(favParsed, thisItem);
+            },
+            error: function(xhr, error, status) {
+                console.log(xhr);
+            }
+        });
+
+    });
+
 })
 
 function updateFilters(data){
@@ -172,8 +188,26 @@ function showProperties(data){
         $("#modal").addClass("d-flex");
         showSpecificModal(this, data);
 
+        var id = $(this).attr("item");
+        var favorites = localStorage.getItem("fav");
         
-
+        if(favorites){
+            var favParsed = JSON.parse(favorites);
+            for(obj of favParsed){
+                console.log(obj.id, id);
+                if(obj.id == id){
+                    $(".add-fav").text("Remove from favorites");
+                    break;
+                }
+                else{
+                    $(".add-fav").text("Add to favorites");
+                }
+            }
+        }
+        else{
+            $(".add-fav").text("Add to favorites");
+        }
+        
     })
 }
 
@@ -447,5 +481,70 @@ function showSpecificModal(item, data){
 
             $(".add-fav").attr("item", id);
         }
+    }
+}
+
+function addOrRemoveFavorites(storage, thisItem){
+    if(storage){
+        console.log("There is something in storage.");
+        var isThisItemInStorage = false;
+        for(obj of storage){
+            console.log(obj.id, thisItem.id)
+            if(obj.id == thisItem.id){
+                console.log("This object is in storage");
+                isThisItemInStorage = true;
+                //DELETE THIS ITEM FROM STORAGE
+                // 1. get storage, 2. delete this item from storage 3. set this as new storage
+                var favorites = localStorage.getItem("fav");
+                var favParsed = JSON.parse(favorites);
+                
+                for(idx in favParsed){
+                    if(favParsed[idx].id == thisItem.id){
+                        delete favParsed[idx];
+                        break;
+                    }
+                }
+
+                var noNullFav = favParsed.filter(function (el) {
+                    return el != null;
+                });
+
+                if(noNullFav.length == 0){
+                    console.log("No items left in localstorage.");
+                    localStorage.removeItem("fav");
+                }
+                else{
+                    console.log("There are still items left in storage.");
+                    var stringFav = JSON.stringify(noNullFav);
+                    localStorage.setItem("fav", stringFav);
+                    console.log(localStorage.getItem("fav"));
+                }
+
+                $(".add-fav").text("Add to favorites");
+                break;
+            }
+        }
+        if(!isThisItemInStorage){
+            //If there are some items in storage but not this one
+            var favorites = localStorage.getItem("fav");
+            var favParsed = JSON.parse(favorites);    
+            favParsed.push(thisItem);
+            var stringFav = JSON.stringify(favParsed);
+            localStorage.setItem("fav", stringFav);
+            console.log(localStorage.getItem("fav")); 
+
+            $(".add-fav").text("Remove from favorites");
+        }
+    }
+    else{
+        //SET ITEM IN STORAGE
+        console.log("There is nothing in storage.");
+        var newFavList = [];
+        newFavList.push(thisItem);
+        var stringFav = JSON.stringify(newFavList);
+        localStorage.setItem("fav", stringFav);
+        console.log(localStorage.getItem("fav"));
+
+        $(".add-fav").text("Remove from favorites");
     }
 }
