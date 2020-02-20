@@ -5,3 +5,9 @@
 5. Documentation
 6. Real data
 7. 
+
+Cities:
+-New York
+-Los Angeles
+-Paris
+-Madrid
