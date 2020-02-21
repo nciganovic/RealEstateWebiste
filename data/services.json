@@ -1,17 +1,20 @@
 [
     {
         "icon": "fa-home",
-        "headline":"Buy home1",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+        "headline":"Buy house",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "class":"find-house"
     },
     {
         "icon": "fa-building",
-        "headline":"Buy apartment1",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+        "headline":"Buy apartment",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "class":"find-apartment"
     },
     {
         "icon": "fa-university",
-        "headline":"Buy land1",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan."
+        "headline":"Buy land",
+        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "class":"find-land"
     }
 ]

@@ -1,6 +1,17 @@
 $(document).ready(function(){
     console.log("property.js");
-    //localStorage.removeItem("fav");
+
+    //Recive localsotrage from main.js
+    var localStatus = localStorage.getItem("status");
+    var localType = localStorage.getItem("type");
+    var localRoom = localStorage.getItem("room");
+    var localLocation = localStorage.getItem("location");
+    var localTypeSep = localStorage.getItem("typeSep")
+    var localLocationSep = localStorage.getItem("locationSep");
+
+    console.log(localStatus, localType, localRoom, localLocation);
+
+    //If no cookies from main.js show all
     $.ajax({
         url : "data/properties.json",
         method: 'GET', 
@@ -8,6 +19,23 @@ $(document).ready(function(){
         success: function(data) { 
             updateFilters(data);
             showProperties(data);
+
+            if(localStatus || localType || localRoom || localLocation){
+                var dataFromLocalStorage = checkStorageFromIndex(data, localStatus, localType, localRoom, localLocation);
+                showProperties(dataFromLocalStorage);
+            }
+
+            if(localTypeSep){
+                var dataWithTypes = filterDataWithSingleParameter(data, localTypeSep, "type");
+                showProperties(dataWithTypes);
+            }
+
+            if(localLocationSep){
+                var dataWithTypes = filterDataWithSingleParameter(data, localLocationSep, "location");
+                showProperties(dataWithTypes);
+            }
+            
+            
         },
         error: function(xhr, error, status) {
             console.log(xhr);
@@ -89,6 +117,8 @@ $(document).ready(function(){
 
     });
 
+    
+
 })
 
 function updateFilters(data){
@@ -122,8 +152,11 @@ function updateFilters(data){
 
     var maxPrice = Math.max.apply(Math, allPrices); 
     var maxRooms = Math.max.apply(Math, allRooms); 
+   
     $("#max-price").attr("value", maxPrice);
     $("#max-rooms").attr("value", maxRooms);
+    $("#max-price").attr("max", maxPrice);
+    $("#max-rooms").attr("max", maxRooms);
     
     makeSelectTag(allStatuses, "Status");
     makeSelectTag(allTypes, "Type");
@@ -228,18 +261,20 @@ function checkValue(){
     var priceRoom = getNames[1];
 
     var maxValue = $(this).attr("max");
- 
+    console.log("MAX VALUE = ", maxValue);
+
 
     if(maxMin == "max" && priceRoom == "price"){
-        var a = document.getElementById("min-price").value;
-        var b = document.getElementById("max-price").value;
+        var strA = document.getElementById("min-price").value;
+        var strB = document.getElementById("max-price").value;
+        
+        var a = Number(strA);
+        var b = Number(strB);
+
         console.log("--MAX-PRICE--");
         console.log(a,b);
         console.log("A ->", typeof(a));
         console.log("B ->", typeof(b));
-
-        var a = Number(strA);
-        var b = Number(strB);
 
         if(b < a){
             document.getElementById("max-price").value = a;
@@ -252,13 +287,13 @@ function checkValue(){
         var strA = document.getElementById("min-price").value;
         var strB = document.getElementById("max-price").value;
 
+        var a = Number(strA);
+        var b = Number(strB);
+
         console.log("--MIN-PRICE--");
         console.log(a,b);
         console.log("A ->", typeof(a));
         console.log("B ->", typeof(b));
-
-        var a = Number(strA);
-        var b = Number(strB);
 
         if(a > b){
             console.log(a, "is bigger then", b);
@@ -547,4 +582,43 @@ function addOrRemoveFavorites(storage, thisItem){
 
         $(".add-fav").text("Remove from favorites");
     }
+}
+
+function checkStorageFromIndex(data, localStatus, localType, localRoom, localLocation){
+    var newData = [];
+    for(d of data){
+        if(localStatus){
+            if(d.status != localStatus){
+                continue;
+            }
+        }
+        if(localType){
+            if(d.type != localType){
+                continue;
+            }
+        }
+        if(localRoom){
+            if(d.rooms != localRoom){
+                continue;
+            }
+        }
+        if(localLocation){
+            if(d.location != localLocation){
+                continue;
+            }
+        }            
+        newData.push(d);    
+    }
+    console.log("New Data: ", newData);
+    return newData;
+}
+
+function filterDataWithSingleParameter(data, param, filter){
+    var newData = [];
+    for(d of data){
+        if(d[filter] == param){
+            newData.push(d);
+        }
+    }
+    return newData;
 }

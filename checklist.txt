@@ -1,13 +1,7 @@
-1. Favorites
+1. Favorites (done)
 2. About me
-3. Modal
+3. Modal (done)
 4. Design  
 5. Documentation
-6. Real data
-7. 
-
-Cities:
--New York
--Los Angeles
--Paris
--Madrid
+6. Real data (done)
+7. Hosting
