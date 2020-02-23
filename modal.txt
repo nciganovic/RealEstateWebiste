@@ -1,0 +1,7 @@
+                <ul>
+                    <li><a class="close-modal" href="#">Close</a></li>
+                    <li><a class="add-fav" data="0" href="#">Add to favorites</a></li>
+                </ul>
+                <ul class="modal-info">
+                    
+                </ul>

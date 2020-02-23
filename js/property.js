@@ -82,43 +82,6 @@ $(document).ready(function(){
         });
     })
 
-    $(".close-modal").click(function(event){
-        event.preventDefault();
-        $("#modal").addClass("d-none");
-        $("#modal").removeClass("d-flex");
-    })
-
-    //Favorites
-    $(".add-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).attr("item");
-        var allData;
-
-        $.ajax({
-            url : "data/properties.json",
-            method: 'GET', 
-            type: 'json',
-            success: function(data) { 
-                for(d of data){
-                    if(d.id == id){
-                        var thisItem = d;
-                    }
-                }
-                var favorites = localStorage.getItem("fav");
-                console.log(favorites);
-                var favParsed = JSON.parse(favorites);
-                console.log(favParsed);
-                addOrRemoveFavorites(favParsed, thisItem);
-            },
-            error: function(xhr, error, status) {
-                console.log(xhr);
-            }
-        });
-
-    });
-
-    
-
 })
 
 function updateFilters(data){
@@ -169,7 +132,7 @@ function showProperties(data){
     html = "";
     for(d of data){
         html += `
-        <div class="col-xl-4 col-lg-6 mt-3">
+        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
                 <span class="image-block img-hover">
                     <a class="image-zoom" href="images/g1.jpg" data-gal="prettyPhoto[gallery]">
                         <img src="images/${d.img}" class="img-fluid " alt="${d.title}">
@@ -505,16 +468,82 @@ function showSpecificModal(item, data){
     for(d of data){
         if(d.id == id){
             specItem = `
-                    <li>${d.title}</li>
-                    <li>${d.location}</li>
-                    <li>${d.status}</li>
-                    <li>${d.type}</li>
-                    <li>${d.price}</li>
-                    <li>${d.rooms}</li>
+            <div class="d-flex">
+                <img class="w-100" src="images/${d.img}" alt=""/>
+            </div>
+            
+            <div class="p-4">
+                <div class="row">
+                    <div class="col-6">
+                        <span class="font-weight-bold float-left">Street:</span> <span class="float-right">${d.title}</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="font-weight-bold float-left">City:</span> <span class="float-right">${d.location}</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="font-weight-bold float-left">Price:</span> <span class="float-right">$${d.price}</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="font-weight-bold float-left">Owner:</span> <span class="float-right">${d.owner}</span>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <p class="font-weight-bold mb-0">Description:</p>  
+                        <p>${d.type} that consists of ${d.rooms} bedrooms located at ${d.location}, ${d.location}.</p>
+                    </div>
+                    <div class="col-12 mt-3 d-flex justify-content-center">
+                        <div class="col-4 d-flex">
+                            <a href="#" data="0" class="add-fav pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Add to favorites</a>
+                        </div>
+                        <div class="col-4 d-flex">
+                            <a href="#" class=" pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Contact</a>
+                        </div>
+                        <div class="col-4 d-flex">
+                            <a href="#" class="close-modal pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 `
             $(".modal-info").html(specItem);
 
             $(".add-fav").attr("item", id);
+
+            $(".close-modal").click(function(event){
+                event.preventDefault();
+                console.log("close-modal");
+                $("#modal").addClass("d-none");
+                $("#modal").removeClass("d-flex");
+            })
+        
+            //Favorites
+            $(".add-fav").click(function(e){
+                e.preventDefault();
+                console.log("add-fav");
+                var id = $(this).attr("item");
+                var allData;
+        
+                $.ajax({
+                    url : "data/properties.json",
+                    method: 'GET', 
+                    type: 'json',
+                    success: function(data) { 
+                        for(d of data){
+                            if(d.id == id){
+                                var thisItem = d;
+                            }
+                        }
+                        var favorites = localStorage.getItem("fav");
+                        console.log(favorites);
+                        var favParsed = JSON.parse(favorites);
+                        console.log(favParsed);
+                        addOrRemoveFavorites(favParsed, thisItem);
+                    },
+                    error: function(xhr, error, status) {
+                        console.log(xhr);
+                    }
+                });
+        
+            });
         }
     }
 }
