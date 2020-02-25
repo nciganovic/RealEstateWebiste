@@ -1,7 +1,7 @@
 1. Favorites (done)
 2. About me
 3. Modal (done)
-4. Design  
+4. Design (done)
 5. Documentation
 6. Real data (done)
 7. Hosting
