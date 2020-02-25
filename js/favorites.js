@@ -4,41 +4,6 @@ $(document).ready(function(){
     console.log(favParse);
     showProperties(favParse);
 
-    $(".close-modal").click(function(event){
-        event.preventDefault();
-        $("#modal").addClass("d-none");
-        $("#modal").removeClass("d-flex");
-    })
-
-    //Favorites
-    $(".add-fav").click(function(e){
-        e.preventDefault();
-        var id = $(this).attr("item");
-        var allData;
-
-        $.ajax({
-            url : "data/properties.json",
-            method: 'GET', 
-            type: 'json',
-            success: function(data) { 
-                for(d of data){
-                    if(d.id == id){
-                        var thisItem = d;
-                    }
-                }
-                var favorites = localStorage.getItem("fav");
-                console.log(favorites);
-                var favParsed = JSON.parse(favorites);
-                console.log(favParsed);
-                addOrRemoveFavorites(favParsed, thisItem);
-            },
-            error: function(xhr, error, status) {
-                console.log(xhr);
-            }
-        });
-
-    });
-    
 })
 
 function showProperties(data){
@@ -90,11 +55,12 @@ function showProperties(data){
                 </div>
             `
         }
-    
+        
         $("#property-card-holder").html(html);
     }
     else{
-        $("#property-card-holder").html("No items added.");
+        html = "<div class='col-12 min-vh-100 mt-5'> <h2 class='text-center'> You dont have any properties added to favorites. </h2> </div>";
+        $("#property-card-holder").html(html);
     }
     
 
@@ -135,16 +101,79 @@ function showSpecificModal(item, data){
     for(d of data){
         if(d.id == id){
             specItem = `
-                    <li>${d.title}</li>
-                    <li>${d.location}</li>
-                    <li>${d.status}</li>
-                    <li>${d.type}</li>
-                    <li>${d.price}</li>
-                    <li>${d.rooms}</li>
+            <div class="d-flex">
+                <img class="w-100" src="images/${d.img}" alt=""/>
+            </div>
+            
+            <div class="p-4">
+                <div class="row">
+                    <form class="w-100">
+                        <div class="col-12">
+                            <input type="text" class="form-control border-radius-0" id="titleModal" placeholder="Subject" name="Subject">
+                        </div>
+                        <div class="col-12 mt-3">
+                            <input type="email" class="form-control border-radius-0" id="emailModal" placeholder="Owner's email" name="Email">
+                        </div>
+                        <div class="col-12 mt-3">
+                            <textarea class="w-100" id="textarea" name="Message" placeholder="Message" required=""></textarea>
+                            </textarea>
+                        </div>
+                        <div class="col-12 mt-3 errors font-08 text-red">
+
+                        </div>
+                    </form>
+                    <div id="modalButtons" class="col-12 mt-3 d-flex justify-content-center">
+                        <button id="sendEmailModal" class="pl-3 pr-3 pt-2 pb-2 mr-3 border modal-btn text-center m-0-md" type="button">Send</button>
+                        <a href="#" data="0" class="add-fav pl-3 pr-3 pt-2 pb-2 mr-3 border modal-btn text-center m-0-md">Add to favorites</a>
+                        <a href="#" class="close-modal pl-3 pr-3 pt-2 pb-2 border ml-3 modal-btn text-center m-0-md"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
+            </div>
                 `
             $(".modal-info").html(specItem);
 
             $(".add-fav").attr("item", id);
+
+            $(".close-modal").click(function(event){
+                event.preventDefault();
+                console.log("close-modal");
+                $("#modal").addClass("d-none");
+                $("#modal").removeClass("d-flex");
+            })
+        
+            //Favorites
+            $(".add-fav").click(function(e){
+                e.preventDefault();
+                console.log("add-fav");
+                var id = $(this).attr("item");
+                var allData;
+        
+                $.ajax({
+                    url : "data/properties.json",
+                    method: 'GET', 
+                    type: 'json',
+                    success: function(data) { 
+                        for(d of data){
+                            if(d.id == id){
+                                var thisItem = d;
+                            }
+                        }
+                        var favorites = localStorage.getItem("fav");
+                        console.log(favorites);
+                        var favParsed = JSON.parse(favorites);
+                        console.log(favParsed);
+                        addOrRemoveFavorites(favParsed, thisItem);
+                    },
+                    error: function(xhr, error, status) {
+                        console.log(xhr);
+                    }
+                });
+        
+            });
+
+            $("#sendEmailModal").click(function(){
+                checkEmail();
+            })
         }
     }
 }
@@ -215,5 +244,60 @@ function addOrRemoveFavorites(storage, thisItem){
         console.log(localStorage.getItem("fav"));
 
         $(".add-fav").text("Remove from favorites");
+    }
+}
+
+function checkEmail(){
+    var errors = [];
+
+    /* check email */
+    var email = $("[name='Email']").val();
+    var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var isEmailValid = regEmail.test(email);
+
+    if(!isEmailValid){
+        errors.push('email');
+    }
+
+    /* check subject */
+    var subject = $("[name='Subject']").val();
+    console.log(subject);
+    var regSubject = /^[a-zA-Z0-9_.-\s]+$/;
+    var isSpecCharFound = regSubject.test(subject);
+    console.log('Subject', subject, 'is', isSpecCharFound);
+    console.log(subject.length)
+    if(!isSpecCharFound || subject.length < 5 || subject.length > 50){
+        errors.push('subject');
+    }
+    
+    /* check message */ 
+    var message = $("[name='Message']").val();
+    var regMessage = /^[a-zA-Z0-9_.-\s]+$/;
+    var isSpecCharFound2 = regMessage.test(message);
+    
+    if(!isSpecCharFound2 || message.length < 20 || message.length > 300){
+        errors.push('message');
+        console.log('Message failed!');
+    }
+
+    console.log(errors);
+    $(".errors").html("");
+    for(e of errors){
+        if(e == "email"){
+            $(".errors").append("<p class='text-red font-08'>Email is not in the right format.</p>");
+        }
+        if(e == "subject"){
+            $(".errors").append("<p class='text-red font-08'>Subject needs to be between 5 and 50 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
+        }
+        if(e == "message"){
+            $(".errors").append("<p class='text-red font-08'>Message needs to be between 20 and 300 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
+        }
+    }
+
+    if(errors.length == 0){
+        alert("Email sent successfully!");
+        $("[name='Email']").val("");
+        $("[name='Subject']").val("");
+        $("[name='Message']").val("");
     }
 }
