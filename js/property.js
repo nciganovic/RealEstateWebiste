@@ -150,16 +150,16 @@ function showProperties(data){
                         </div>
                         <ul class="facilities-list clearfix">
                             <li class="mt-2 mb-2">
-                                <i class="fas fa-bed"></i> ${d.rooms} Bedrooms
+                                <i class="fas fa-bed"></i>${d.rooms} Bedrooms
                             </li>
                             <li class="mt-2 mb-2">
-                                <i class="fas fa-bath"></i> ${d.status}
+                                <i class="fas fa-adjust"></i>${d.status}
                             </li>
                             <li class="mt-2 mb-2">
-                                <i class="far fa-building"></i> ${d.type}
+                                <i class="far fa-building"></i>${d.type}
                             </li>
                             <li class="mt-2 mb-2">
-                                <i class="far fa-building"></i> ${d.price}
+                                <i class="fas fa-dollar-sign"></i>${d.price}
                             </li>
                         </ul>
                     </div>
@@ -168,12 +168,16 @@ function showProperties(data){
                             <i class="fa fa-user"></i> ${d.owner}
                         </a>
                         <span>
-                            <a class="open-modal" item="${d.id}" href="">Read more <i class="fas fa-arrow-right"></i></a>
+                            <a class="open-modal" item="${d.id}" href="">Contact <i class="fas fa-arrow-right"></i></a>
                         </span>
                     </div>
                 </div>
             </div>
         `
+    }
+
+    if(data.length == 0){
+        html = "<div class='col-12'> <h2 class='text-center'> Sorry, we couldn't find any item matching your search. </h2> </div>";
     }
 
     $("#property-card-holder").html(html);
@@ -474,32 +478,25 @@ function showSpecificModal(item, data){
             
             <div class="p-4">
                 <div class="row">
-                    <div class="col-6">
-                        <span class="font-weight-bold float-left">Street:</span> <span class="float-right">${d.title}</span>
-                    </div>
-                    <div class="col-6">
-                        <span class="font-weight-bold float-left">City:</span> <span class="float-right">${d.location}</span>
-                    </div>
-                    <div class="col-6">
-                        <span class="font-weight-bold float-left">Price:</span> <span class="float-right">$${d.price}</span>
-                    </div>
-                    <div class="col-6">
-                        <span class="font-weight-bold float-left">Owner:</span> <span class="float-right">${d.owner}</span>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <p class="font-weight-bold mb-0">Description:</p>  
-                        <p>${d.type} that consists of ${d.rooms} bedrooms located at ${d.location}, ${d.location}.</p>
-                    </div>
-                    <div class="col-12 mt-3 d-flex justify-content-center">
-                        <div class="col-4 d-flex">
-                            <a href="#" data="0" class="add-fav pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Add to favorites</a>
+                    <form class="w-100">
+                        <div class="col-12">
+                            <input type="text" class="form-control border-radius-0" id="titleModal" placeholder="Subject" name="Subject">
                         </div>
-                        <div class="col-4 d-flex">
-                            <a href="#" class=" pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Contact</a>
+                        <div class="col-12 mt-3">
+                            <input type="email" class="form-control border-radius-0" id="emailModal" placeholder="Owner's email" name="Email">
                         </div>
-                        <div class="col-4 d-flex">
-                            <a href="#" class="close-modal pl-3 pr-3 pt-2 pb-2 m-auto border modal-btn font-08">Close</a>
+                        <div class="col-12 mt-3">
+                            <textarea class="w-100" id="textarea" name="Message" placeholder="Message" required=""></textarea>
+                            </textarea>
                         </div>
+                        <div class="col-12 mt-3 errors font-08 text-red">
+
+                        </div>
+                    </form>
+                    <div id="modalButtons" class="col-12 mt-3 d-flex justify-content-center">
+                        <button id="sendEmailModal" class="pl-3 pr-3 pt-2 pb-2 mr-3 border modal-btn text-center m-0-md" type="button">Send</button>
+                        <a href="#" data="0" class="add-fav pl-3 pr-3 pt-2 pb-2 mr-3 border modal-btn text-center m-0-md">Add to favorites</a>
+                        <a href="#" class="close-modal pl-3 pr-3 pt-2 pb-2 border ml-3 modal-btn text-center m-0-md"><i class="fas fa-times"></i></a>
                     </div>
                 </div>
             </div>
@@ -544,6 +541,10 @@ function showSpecificModal(item, data){
                 });
         
             });
+
+            $("#sendEmailModal").click(function(){
+                checkEmail();
+            })
         }
     }
 }
@@ -650,4 +651,59 @@ function filterDataWithSingleParameter(data, param, filter){
         }
     }
     return newData;
+}
+
+function checkEmail(){
+    var errors = [];
+
+    /* check email */
+    var email = $("[name='Email']").val();
+    var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var isEmailValid = regEmail.test(email);
+
+    if(!isEmailValid){
+        errors.push('email');
+    }
+
+    /* check subject */
+    var subject = $("[name='Subject']").val();
+    console.log(subject);
+    var regSubject = /^[a-zA-Z0-9_.-\s]+$/;
+    var isSpecCharFound = regSubject.test(subject);
+    console.log('Subject', subject, 'is', isSpecCharFound);
+    console.log(subject.length)
+    if(!isSpecCharFound || subject.length < 5 || subject.length > 50){
+        errors.push('subject');
+    }
+    
+    /* check message */ 
+    var message = $("[name='Message']").val();
+    var regMessage = /^[a-zA-Z0-9_.-\s]+$/;
+    var isSpecCharFound2 = regMessage.test(message);
+    
+    if(!isSpecCharFound2 || message.length < 20 || message.length > 300){
+        errors.push('message');
+        console.log('Message failed!');
+    }
+
+    console.log(errors);
+    $(".errors").html("");
+    for(e of errors){
+        if(e == "email"){
+            $(".errors").append("<p class='text-red font-08'>Email is not in the right format.</p>");
+        }
+        if(e == "subject"){
+            $(".errors").append("<p class='text-red font-08'>Subject needs to be between 5 and 50 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
+        }
+        if(e == "message"){
+            $(".errors").append("<p class='text-red font-08'>Message needs to be between 20 and 300 characters long, also special characters like #$%&/()'<>;: are not allowed.</p>");
+        }
+    }
+
+    if(errors.length == 0){
+        alert("Email sent successfully!");
+        $("[name='Email']").val("");
+        $("[name='Subject']").val("");
+        $("[name='Message']").val("");
+    }
 }

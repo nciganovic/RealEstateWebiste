@@ -1251,11 +1251,17 @@ p.copy-right-grids a {
     height: 36px;
     text-align: center;
 }
-
+textarea {
+    resize: none;
+    padding: 10px;
+  }
 .w3social-icons ul li a span {
     color: #fff;
     font-size: 15px;
     line-height: 36px;
+}
+.text-red{
+    color: red;
 }
 
 .w3social-icons ul li a:hover {
@@ -1269,6 +1275,8 @@ a.logo:hover {
 }
 .modal-holder{
     width: 640px;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
 }
 .modal-btn{
     background-color: #ff6b6b;
@@ -1279,8 +1287,14 @@ a.logo:hover {
     background-color: #ff6b6b8e;
     color: white;
 }
+#modalButtons{
+    flex-direction: row;   
+}
 .font-08{
     font-size: 0.8rem;
+}
+.min-vh-100{
+    min-height: 100vh;
 }
 /* Media */
 @media screen and (max-width: 1440px) {
@@ -1367,6 +1381,12 @@ a.logo:hover {
     }
     .modal-holder{
         width: 500px;
+    }
+    #modalButtons{
+        flex-direction: column;   
+    }
+    .m-0-md{
+        margin: 0 !important;
     }
 }
 
