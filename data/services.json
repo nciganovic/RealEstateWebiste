@@ -2,19 +2,19 @@
     {
         "icon": "fa-home",
         "headline":"Buy house",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "text":"Find a perfect house and enjoy the large space and garden that you will get.",
         "class":"find-house"
     },
     {
         "icon": "fa-building",
         "headline":"Buy apartment",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "text":"Find confortable apartemnt in four big cities all well equiped with newes gadgets and tech.",
         "class":"find-apartment"
     },
     {
         "icon": "fa-university",
         "headline":"Buy land",
-        "text":"Itaque earum rerum hic tenetur asap iente delectus rulla accumsan.",
+        "text":"Find a land and build whatever you want on it. Build home from scratch.",
         "class":"find-land"
     }
 ]
