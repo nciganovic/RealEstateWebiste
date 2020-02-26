@@ -156,7 +156,6 @@ $(document).ready(function(){
         
         window.location = "property.html";
     })
-    
 })
 
 function makeServices(data){

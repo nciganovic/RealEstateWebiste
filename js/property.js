@@ -141,7 +141,7 @@ function showProperties(data){
                 <div class="property-info-list">
                     <div class="detail">
                         <h4 class="title">
-                            <a href="single.html">${d.title}</a>
+                            ${d.title}
                         </h4>
                         <div class="location mt-2 mb-2">
                             <a href="single.html">

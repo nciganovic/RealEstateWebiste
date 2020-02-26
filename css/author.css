@@ -21,3 +21,16 @@
 .font-15{
     font-size: 1.5rem;
 }
+.pb-big{
+    padding-top: 5% !important;
+    padding-bottom: 700px !important;
+}
+#page-container{
+    position: relative;
+    min-height: 100vh;
+}
+.footer-holder{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
