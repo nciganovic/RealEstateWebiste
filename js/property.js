@@ -144,9 +144,7 @@ function showProperties(data){
                             ${d.title}
                         </h4>
                         <div class="location mt-2 mb-2">
-                            <a href="single.html">
-                               <i class="fas fa-map-marker-alt"></i> ${d.location},  ${d.date}
-                            </a>
+                            <i class="fas fa-map-marker-alt"></i> ${d.location},  ${d.date}
                         </div>
                         <ul class="facilities-list clearfix">
                             <li class="mt-2 mb-2">
@@ -473,7 +471,7 @@ function showSpecificModal(item, data){
         if(d.id == id){
             specItem = `
             <div class="d-flex">
-                <img class="w-100" src="images/${d.img}" alt=""/>
+                <img class="w-100" src="images/${d.img}" alt="${d.img}"/>
             </div>
             
             <div class="p-4">
