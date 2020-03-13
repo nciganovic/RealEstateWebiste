@@ -1,18 +1,14 @@
 [
     {
         "href": "www.facebook.com",
-        "icon": "fa-facebook-f"
+        "icon": "https://www.facebook.com/nikola.ciganovic.90"
     },
     {
-        "href": "www.google.com",
-        "icon": "fa-google-plus"
-    },
-    {
-        "href": "www.twitter.com",
+        "href": "https://twitter.com/home",
         "icon": "fa-twitter"
     },
     {
-        "href": "www.dribbble.com",
+        "href": "https://dribbble.com",
         "icon": "fa-dribbble"
     }
 ]
