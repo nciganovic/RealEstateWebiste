@@ -14,5 +14,9 @@
     {
         "name":"Author",
         "href":"author.html"
+    },
+    {
+        "name":"Documentation",
+        "href":"docs.pdf"
     }
 ]
